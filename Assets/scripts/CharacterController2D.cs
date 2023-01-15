@@ -62,4 +62,21 @@ public class CharacterController2D : MonoBehaviour
 
         transform.localScale = scale;
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag=="Star")
+        {
+             Destroy(collision.gameObject);
+            gameObject.tag="PowerUp";
+            gameObject.GetComponent<Renderer>().material.color=Color.green;
+            StartCoroutine("reset");  
+        }
+          
+    }
+     IEnumerator reset()
+     {
+         yield return new WaitForSeconds(5f);
+        gameObject.tag="Player";
+        gameObject.GetComponent<Renderer>().material.color=Color.white;
+    }
 }
